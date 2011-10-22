@@ -1,0 +1,40 @@
+#!/bin/bash
+
+if [ -z $1 ]; then
+	echo "Please specify a version"
+	exit
+fi
+
+abort() {
+	echo $1
+	exit 1
+}
+
+FULLVERSION=$1
+VERSION=${FULLVERSION/-*/}
+
+echo "Full version: $FULLVERSION"
+echo "Version: $VERSION"
+
+sed -i -e "/^\$version =/ c \$version = '$FULLVERSION'" launch_here.rb
+sed -i -e "/^\$version ||=/ c \$version ||= '$FULLVERSION'" bin/rbot
+sed -i -e "/^  s.version =/ c \  s.version = '$VERSION'" rbot.gemspec
+sed -i -e "/^  <!ENTITY dhpackageversion / c \  <!ENTITY dhpackageversion \"$VERSION\">" man/*.xml
+
+NOGIT=${FULLVERSION/-git/}
+if [ $NOGIT == $FULLVERSION ]; then
+	# Not a git version
+	rake package || abort "Failed to build package!"
+	git commit -m "Version $FULLVERSION" -a || abort "Failed to commit release!"
+	git tag -a -m "rbot $FULLVERSION" rbot-$FULLVERSION || abort "Failed to tag release!"
+	if [ $VERSION != $FULLVERSION ]; then
+		pushd pkg
+		mv rbot-$VERSION.gem rbot-$FULLVERSION.gem
+		mv rbot-$VERSION.tgz rbot-$FULLVERSION.tgz
+		mv rbot-$VERSION.zip rbot-$FULLVERSION.zip
+		popd
+	fi
+else
+	# git version
+	git commit -m "Start working on $NOGIT" -a
+fi

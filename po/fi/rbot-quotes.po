@@ -1,0 +1,121 @@
+# Finnish translations for PACKAGE package.
+# Copyright (C) 2009 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Automatically generated, 2009.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: rbot\n"
+"POT-Creation-Date: 2010-07-02 00:18+0200\n"
+"PO-Revision-Date: 2009-03-20 15:57+0100\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: data/rbot/plugins/quotes.rb:143
+msgid ""
+"addquote [<channel>] <quote> => Add quote <quote> for channel <channel>. You "
+"only need to supply <channel> if you are addressing %{nick} privately."
+msgstr ""
+
+#: data/rbot/plugins/quotes.rb:145
+msgid ""
+"delquote [<channel>] <num> => delete quote from <channel> with number <num>. "
+"You only need to supply <channel> if you are addressing %{nick} privately."
+msgstr ""
+
+#: data/rbot/plugins/quotes.rb:147
+msgid ""
+"getquote [<channel>] [<num>] => get quote from <channel> with number <num>. "
+"You only need to supply <channel> if you are addressing %{nick} privately. "
+"Without <num>, a random quote will be returned."
+msgstr ""
+
+#: data/rbot/plugins/quotes.rb:149
+msgid ""
+"searchquote [<channel>] <regexp> => search for quote from <channel> that "
+"matches <regexp>. You only need to supply <channel> if you are addressing "
+"%{nick} privately."
+msgstr ""
+
+#: data/rbot/plugins/quotes.rb:151
+msgid ""
+"listquotes [<channel>] <regexp> => list the quotes from <channel> that match "
+"<regexp>. You only need to supply <channel> if you are addressing %{nick} "
+"privately."
+msgstr ""
+
+#: data/rbot/plugins/quotes.rb:153
+msgid ""
+"topicquote [<channel>] [<num>] => set topic to quote from <channel> with "
+"number <num>. You only need to supply <channel> if you are addressing "
+"%{nick} privately. Without <num>, a random quote will be set."
+msgstr ""
+
+#: data/rbot/plugins/quotes.rb:155
+msgid ""
+"countquote [<channel>] <regexp> => count quotes from <channel> that match "
+"<regexp>. You only need to supply <channel> if you are addressing %{nick} "
+"privately."
+msgstr ""
+
+#: data/rbot/plugins/quotes.rb:157
+msgid ""
+"whoquote [<channel>] <num> => show who added quote <num>. You only need to "
+"supply <channel> if you are addressing %{nick} privately"
+msgstr ""
+
+#: data/rbot/plugins/quotes.rb:159
+msgid ""
+"whenquote [<channel>] <num> => show when quote <num> was added. You only "
+"need to supply <channel> if you are addressing %{nick} privately"
+msgstr ""
+
+#: data/rbot/plugins/quotes.rb:161
+msgid ""
+"lastquote [<channel>] => show the last quote in a given channel. You only "
+"need to supply <channel> if you are addressing %{nick} privately"
+msgstr ""
+
+#: data/rbot/plugins/quotes.rb:163
+msgid ""
+"Quote module (Quote storage and retrieval) topics: addquote, delquote, "
+"getquote, searchquote, listquotes, topicquote, countquote, whoquote, "
+"whenquote, lastquote"
+msgstr ""
+
+#: data/rbot/plugins/quotes.rb:180 data/rbot/plugins/quotes.rb:194
+#: data/rbot/plugins/quotes.rb:208 data/rbot/plugins/quotes.rb:222
+#: data/rbot/plugins/quotes.rb:236 data/rbot/plugins/quotes.rb:250
+#: data/rbot/plugins/quotes.rb:278 data/rbot/plugins/quotes.rb:291
+msgid "quote not found!"
+msgstr ""
+
+#: data/rbot/plugins/quotes.rb:189 data/rbot/plugins/quotes.rb:231
+#: data/rbot/plugins/quotes.rb:273 data/rbot/plugins/quotes.rb:286
+msgid "[%{num}] %{quote}"
+msgstr ""
+
+#: data/rbot/plugins/quotes.rb:203
+msgid "quote %{num} added by %{source}"
+msgstr ""
+
+#: data/rbot/plugins/quotes.rb:217
+msgid "quote %{num} added on %{date}"
+msgstr ""
+
+#: data/rbot/plugins/quotes.rb:244
+msgid "%{total} quotes matching %{reg} found: %{list}"
+msgstr ""
+
+#: data/rbot/plugins/quotes.rb:259
+msgid "%{total} quotes matching %{reg}"
+msgstr ""
+
+#: data/rbot/plugins/quotes.rb:264
+msgid "%{total} quotes"
+msgstr ""
