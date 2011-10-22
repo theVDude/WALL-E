@@ -314,7 +314,7 @@ end
 
 plugin = SearchPlugin.new
 
-plugin.map "search *words", :action => 'google', :threaded => true
+#plugin.map "search *words", :action => 'google', :threaded => true
 plugin.map "google *words", :action => 'google', :threaded => true
 plugin.map "lucky *words", :action => 'lucky', :threaded => true
 plugin.map "gcount *words", :action => 'gcount', :threaded => true
