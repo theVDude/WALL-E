@@ -141,12 +141,12 @@ class DictPlugin < Plugin
         url << "?view=uk"
       end
       h = @bot.httputil.get(url, :max_redir => 5)
-      if h 
+      if h
 	defs = h.split("<span class=\"definition\">")
 	defs = defs[1..-1].map {|d| d.split("</span>")[0]}
         if defs.size == 0
 	  return false if justcheck
-	  m.reply "word not found: #{word}"
+	  m.reply "#{word} not found"
 	  return false
 	end
 	m.reply("#{word}: #{url}") unless justcheck
