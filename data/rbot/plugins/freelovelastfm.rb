@@ -231,7 +231,7 @@ class LastFMPlugin < Plugin
 		else
 		  userloved = false
 		end
-		ratio = playcount.to_i / listeners.to_i
+		ratio = ((( playcount.to_f / listeners.to_f ) * 100 ).round / 100.0)
 		play_ratio = "#{ratio}:1"
 		tags = Array.new
 		track_info.elements["toptags"].each_element do
