@@ -66,7 +66,6 @@ class WhatCDPlugin < Plugin
 	uploaded, downloaded, userclass = nil, nil
 	results.root.xpath("//ul[@class = 'stats nobullet']").each do
 	  |li|
-	  debug li.text
 	  if li.text =~ /Uploaded: (.*) ([A-Z]{0,2})$/
 	    uploaded = "#{$1} #{$2}"
 	  end
@@ -77,8 +76,13 @@ class WhatCDPlugin < Plugin
 	    userclass = $1
 	  end
 	end
-	if uploaded == nil or downloaded == nil or userclass = nil
-          m.reply "#{user}: http://ssl.what.cd/#{trailing} http://what.cd/#{trailing}"
+	user = results.root.xpath("//div[@class = 'thin']/h2")[0].text
+	if uploaded == nil or downloaded == nil
+	  if userclass == nil
+            m.reply "#{user} |  http://ssl.what.cd/#{trailing} http://what.cd/#{trailing}"
+	  else
+	    m.reply "#{user} | #{userclass} | http://ssl.what.cd/#{trailing} http://what.cd/#{trailing}"
+	  end
 	else
 	  m.reply "#{user} | #{userclass} | Up: #{uploaded} | Down: #{downloaded} | http://ssl.what.cd/#{trailing} http://what.cd/#{trailing}"
 	end
