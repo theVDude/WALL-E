@@ -63,7 +63,7 @@ class WhatCDPlugin < Plugin
       trailing = results.uri.to_s.split("https://ssl.what.cd/")[1]
       page = trailing.split("?")[0]
       if page == "user.php"
-	uploaded, downloaded = nil, nil
+	uploaded, downloaded, userclass = nil, nil
 	results.root.xpath("//ul[@class = 'stats nobullet']").each do
 	  |li|
 	  if li.text =~ /Uploaded: (.*) ([A-Z]{0,2})$/
@@ -72,11 +72,19 @@ class WhatCDPlugin < Plugin
 	  if li.text =~ /Downloaded: (.*) ([A-Z]{0,2})$/
 	    downloaded = "#{$1} #{$2}"
 	  end
+	  if li.text =~ /Class: (.*)$/
+	    userclass = $1
+	  end
 	end
+	user = results.root.xpath("//div[@class = 'thin']/h2")[0].text
 	if uploaded == nil or downloaded == nil
-          m.reply "#{user}: http://ssl.what.cd/#{trailing} http://what.cd/#{trailing}"
+	  if userclass == nil
+            m.reply "#{user} |  http://ssl.what.cd/#{trailing} http://what.cd/#{trailing}"
+	  else
+	    m.reply "#{user} | #{userclass} | http://ssl.what.cd/#{trailing} http://what.cd/#{trailing}"
+	  end
 	else
-	  m.reply "#{user} | Up: #{uploaded} | Down: #{downloaded} | http://ssl.what.cd/#{trailing} http://what.cd/#{trailing}"
+	  m.reply "#{user} | #{userclass} | Up: #{uploaded} | Down: #{downloaded} | http://ssl.what.cd/#{trailing} http://what.cd/#{trailing}"
 	end
       else
         m.reply "No direct match for #{user}. #{@bot.nick} will be able to show non-direct match results in the future."
