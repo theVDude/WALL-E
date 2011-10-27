@@ -63,20 +63,24 @@ class WhatCDPlugin < Plugin
       trailing = results.uri.to_s.split("https://ssl.what.cd/")[1]
       page = trailing.split("?")[0]
       if page == "user.php"
-	uploaded, downloaded = nil, nil
+	uploaded, downloaded, userclass = nil, nil
 	results.root.xpath("//ul[@class = 'stats nobullet']").each do
 	  |li|
+	  debug li.text
 	  if li.text =~ /Uploaded: (.*) ([A-Z]{0,2})$/
 	    uploaded = "#{$1} #{$2}"
 	  end
 	  if li.text =~ /Downloaded: (.*) ([A-Z]{0,2})$/
 	    downloaded = "#{$1} #{$2}"
 	  end
+	  if li.text =~ /Class: (.*)$/
+	    userclass = $1
+	  end
 	end
-	if uploaded == nil or downloaded == nil
+	if uploaded == nil or downloaded == nil or userclass = nil
           m.reply "#{user}: http://ssl.what.cd/#{trailing} http://what.cd/#{trailing}"
 	else
-	  m.reply "#{user} | Up: #{uploaded} | Down: #{downloaded} | http://ssl.what.cd/#{trailing} http://what.cd/#{trailing}"
+	  m.reply "#{user} | #{userclass} | Up: #{uploaded} | Down: #{downloaded} | http://ssl.what.cd/#{trailing} http://what.cd/#{trailing}"
 	end
       else
         m.reply "No direct match for #{user}. #{@bot.nick} will be able to show non-direct match results in the future."
