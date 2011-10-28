@@ -63,14 +63,24 @@ class WhatCDPlugin < Plugin
       trailing = results.uri.to_s.split("https://ssl.what.cd/")[1]
       page = trailing.split("?")[0]
       if page == "user.php"
-	uploaded, downloaded, userclass = nil, nil
+	uploaded, downloaded, uploadbytes, downloadbytes, userclass = nil, nil, nil, nil
 	results.root.xpath("//ul[@class = 'stats nobullet']").each do
 	  |li|
 	  if li.text =~ /Uploaded: (.*) ([A-Z]{0,2})$/
 	    uploaded = "#{$1} #{$2}"
+	    if $2 == "TB"
+	      uploadbytes = ($1.to_f) * 1099511627776
+	    elsif $2 == "GB"
+	      uploadbytes = ($1.to_f) * 1073741824
+            end
 	  end
 	  if li.text =~ /Downloaded: (.*) ([A-Z]{0,2})$/
 	    downloaded = "#{$1} #{$2}"
+	    if $2 == "TB"
+	      downloadbytes = ($1.to_f) * 1099511627776
+	    elsif $2 == "GB"
+	      downloadbytes = ($1.to_f) * 1073741824
+            end
 	  end
 	  if li.text =~ /Class: (.*)$/
 	    userclass = $1
@@ -84,7 +94,9 @@ class WhatCDPlugin < Plugin
 	    m.reply "#{user} | #{userclass} | http://ssl.what.cd/#{trailing} http://what.cd/#{trailing}"
 	  end
 	else
-	  m.reply "#{user} | #{userclass} | Up: #{uploaded} | Down: #{downloaded} | http://ssl.what.cd/#{trailing} http://what.cd/#{trailing}"
+	  ratio = (((uploadbytes / downloadbytes) * 100).round / 100.0)
+	  buffer = ((uploadbytes - downloadbytes) / 1073741824)
+	  m.reply "#{user} | #{userclass} | Up: #{uploaded} | Down: #{downloaded} | Ratio: #{ratio} | Buffer: #{buffer} GB | http://ssl.what.cd/#{trailing} http://what.cd/#{trailing}"
 	end
       else
         m.reply "No direct match for #{user}. #{@bot.nick} will be able to show non-direct match results in the future."
