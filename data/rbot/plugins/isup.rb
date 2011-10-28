@@ -1,3 +1,13 @@
+# Title: isup.me plugin for rbot
+#
+# Author: Rob Bruce <rb.cubed@gmail.com>
+#
+# Copyright: (C) 2011 Rob Bruce
+#
+# License: GPL v2
+#
+# Uses isup.me to check if a website is up or down
+
 require 'rubygems'
 require 'mechanize'
 
