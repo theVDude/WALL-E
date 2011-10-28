@@ -15,7 +15,7 @@ class IsupPlugin < Plugin
     page.root.xpath("//*[@id='container']").each do
       |li|
       if li.text =~ /It's just you. (.*)/
-        m.reply "It's up!"
+        m.reply "It's up! http://" + site
       else
         m.reply "It's down!"
       end
